@@ -4,6 +4,4 @@
 *.o
 
 # executables
-/src/HelloWorld
-/src/WelcomeToAssembler
-
+*.out
