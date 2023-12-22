@@ -1,0 +1,6 @@
+### ASM ###
+
+# object files
+*.o
+
+# executables
