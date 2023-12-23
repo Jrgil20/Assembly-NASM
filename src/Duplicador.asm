@@ -1,11 +1,11 @@
 section .data
-    prompt db "Ingrese un número: (1..4)", 0
+    prompt db "Ingrese un número: (1..4)", 0 
     promptLen equ $ - prompt
     output db "El doble es: ", 0
     outputLen equ $ - output
 
 section .bss ; sección para declarar variables
-    number resb 14 ; variable para almacenar el número ingresado por el usuario
+    number resb 4 ; variable para almacenar el número ingresado por el usuario
 
 section .text
     global _start
@@ -22,7 +22,7 @@ _start:
     mov eax, 3 ; sys_read
     mov ebx, 0 ; stdin
     mov ecx, number ; buffer
-    mov edx, 1 ; longitud del buffer
+    mov edx, 4 ; longitud del buffer
     int 0x80
 
     ; Convertir número a entero
@@ -30,11 +30,9 @@ _start:
     sub eax, '0' ; resta el valor de 0 (48 posiciones en ASCII) para convertirlo a entero
 
     ; Calcular el doble del número
-    
     add eax, eax ; eax = eax + eax
 
     ; Convertir el doble a cadena de caracteres
-    
     add eax, '0' ; suma el valor de 0 (48 posiciones en ASCII) para convertirlo a caracter
     mov [number], eax ; mueve el número a la variable number
 
