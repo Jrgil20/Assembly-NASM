@@ -1,10 +1,21 @@
-    "runArgs": [
-        "apt-get",
-        "update",
-        "&&",
-        "apt-get",
-        "install",
-        "-y",
-        "nasm"
-    ]
+{
+    "name": "My-nasm-container",
+    "postCreateCommand": [
+        "sudo apt-get update",
+        "sudo apt-get install nasm -y"
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Aquí van tus configuraciones personalizadas
+            },
+            "extensions": [
+                "ms-vscode.arm",
+                "ms-vscode.Arm-Assembly",
+                "ms-vscode.Arm-Assembly-syntax",
+                "ms-vscode.gas",
+                "ms-vscode.asm-intel-x86-generic"
+            ]
+        }
+    }
 }
