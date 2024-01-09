@@ -180,3 +180,5 @@ exit:
     mov eax, 1
     xor ebx, ebx
     int 0x80
+
+;https://cratecode.com/info/x86-nasm-assembly-function-calls
