@@ -1,5 +1,13 @@
 ;	CALCULADORA BASICA CON NUMEROS DE 32 BITS
 ;	REALIZA OPERACIONES DE SUMA, RESTA, MULTIPLICACION Y DIVISON
+; Este código realiza una operación de selección en un arreglo de enteros.
+; Recibe como parámetros:
+; - La dirección base del arreglo en el registro RDI.
+; - El número de elementos en el arreglo en el registro RCX.
+; - El índice del elemento mínimo en el registro RAX.
+; - El índice del elemento máximo en el registro RBX.
+; El código selecciona el elemento mínimo y máximo del arreglo y los guarda en los registros RAX y RBX respectivamente.
+
 
 section .data				; *********MENSAJES*********
 	opcion db '0'			
@@ -172,23 +180,23 @@ _start:
 	
 	;CONVERTIR NUMERO RESULTADO (EAX) A CADENA DE CARACTERES
 	
-	Resultado:
-	xor esi, esi
-	mov ebx, 10
-	acadena:
-	xor edx, edx
-	idiv ebx
-	add edx, 30h
-	mov [cadenaRes+esi], edx
-	inc esi
-	cmp eax, 0
-	jne acadena
+	Resultado:				
+	xor esi, esi			;limpiar esi
+	mov ebx, 10				;base 10
+	acadena:				;convertir numero a cadena
+	xor edx, edx			;limpiar edx
+	idiv ebx				;eax = eax / ebx
+	add edx, 30h			;convertir a caracter
+	mov [cadenaRes+esi], edx	;guardar caracter
+	inc esi					;incrementar contador
+	cmp eax, 0				;comparar eax con 0
+	jne acadena				;si no es 0, volver a convertir
 	
 	Invertircadena:
 	mov eax, cadenaRes 		;INVERTIR CADENA (RESULTADO)
-	mov esi, 0
-	mov edi, 9
-	mov ecx, 10
+	mov esi, 0				
+	mov edi, 9				
+	mov ecx, 10				
 	invertir:
 	xor ebx, ebx
 	mov bl, [eax+esi]
@@ -198,14 +206,14 @@ _start:
 	LOOP invertir
 	
 	Output msjres, lenmsjres	;IMPRIMIR RESULTADO
-	Output signo, 1
-	Output cadenaF, 10
+	Output signo, 1			;improir signo en caso de que sea negativo
+	Output cadenaF, 10		;imprimir cadenaF
 	
 	Output Salir, lenSalir 		;OPCION DE SALIR O CONTINUAR
-	Input salir, 2
-	mov al, [salir]
-	cmp al, 'n'
-	je Inicio
+	Input salir, 2		;call leer opcion
+	mov al, [salir]		;VERIFICAR OPCION
+	cmp al, 'n'			;si la opcion es n, 
+	je Inicio			;volver a inicio
 	
 	mov eax, 1			;SALIR	
 	int 80h				;llamada al sistema
