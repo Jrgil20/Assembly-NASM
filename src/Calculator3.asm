@@ -52,19 +52,27 @@ _start:
     int 80h
 
 add_numbers:
-    add byte [num1], [num2]
+    mov al, byte [num1]
+    add al, byte [num2]
+    mov byte [result], al
     jmp print_result
 
 subtract_numbers:
-    sub byte [num1], [num2]
+    mov al, byte [num1]
+    sub al, byte [num2]
+    mov byte [result], al
     jmp print_result
 
 multiply_numbers:
-    mul byte [num1], [num2]
+    mov al, byte [num1]
+    mul byte [num2]
+    mov byte [result], al
     jmp print_result
 
 divide_numbers:
-    div byte [num1], [num2]
+    mov al, byte [num1]
+    div byte [num2]
+    mov byte [result], al
     jmp print_result
 
 print_result:
