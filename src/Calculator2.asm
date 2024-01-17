@@ -21,6 +21,8 @@ section .data				; *********MENSAJES*********
 	msjn2 db 'numero 2: '
 	msjres db 13, 10, 'Resultado: '
 	lenmsjres equ $-msjres
+	errorDiv0 db 13, 10, 'Error: Division por 0'
+	lenErrorDiv0 equ $-errorDiv0
 	Salir db 13, 10, 10, 'Salir? [Y/n]', 13, 10
 	lenSalir equ $-Salir
 
@@ -164,10 +166,16 @@ _start:
 	jmp Resultado			;salta a resultado
 	Dividir:			;DIVISION	
 	xor edx, edx			;limpia edx
+	cmp ebx, 0          ;compara ebx con 0
+    je ErrorDivision    ;si ebx es igual a 0, salta a ErrorDivision
 	idiv ebx				;eax = eax / ebx
 	push edx				;guarda el resto en la pila
 	jmp Resultado			;salta a resultado
 	
+	ErrorDivision:
+   ; rebruto pongale 0
+	Output errorDiv0, lenErrorDiv0 ;imprime error
+
 	procesarResta:			;Procesar Resta por si es negativo
 	cmp eax, 0				;compara eax con 0
 	jg Resultado			;si es mayor a 0, salta a resultado
